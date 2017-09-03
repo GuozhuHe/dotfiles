@@ -1,4 +1,4 @@
-TARGETS=git tmux zsh vim
+TARGETS=git zsh vim tmux
 
 ZSH_CONF_NAME=${USER}.zsh
 
@@ -18,15 +18,14 @@ vim: $(VIM)
 $(GIT): gitconfig
 	cp gitconfig $(GIT)
 
-$(TMUX): tmux.conf
-	cp tmux.conf $(TMUX)
-
 $(ZSH):
 	git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+	git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 	cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 $(ZSH_CONF): custom.zsh
 	cp custom.zsh $(ZSH_CONF)
+	source $(ZSH_CONF)
 
 $(VIM): vimrc
 	rm -rf ~/.vimrc ~/.vim
@@ -35,7 +34,11 @@ $(VIM): vimrc
 	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	vim +PluginInstall +qall
 
+$(TMUX): tmux.conf
+	cp tmux.conf $(TMUX)
+
 .PHONY: clean
 
 clean:
-	-rm $(GIT) $(TMUX)
+	-rm -rf $(GIT) $(TMUX) $(VIM) $(ZSH) ./zshrc
+

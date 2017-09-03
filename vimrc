@@ -1,6 +1,5 @@
-"
 "set clipboard=unnamed
-"set mouse=a
+set mouse=a
 set fileencodings=utf8,gb18030,gbk,gb2312,big5
 
 "  my
@@ -9,6 +8,24 @@ set cursorline
 set smartindent
 set guifont=Monaco:h11
 set guifontwide=NSimsun:h12
+
+"自动对齐
+set autoindent
+
+"浅色显示当前行
+autocmd InsertLeave * se nocul
+
+"显示输入的命令
+set showcmd
+
+"控制状态栏位置 2为显示 1 或0 为隐藏
+set laststatus=2
+
+let g:airline_theme='base16'
+"关闭状态显示空白符号计数
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+
 " =====end my
 
 " =============================
@@ -28,11 +45,10 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-"Plugin 'klen/python-mode'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'L9'
-Plugin 'fatih/vim-go'
-Plugin 'trusktr/seti.vim'
-Plugin 'cespare/vim-toml'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
@@ -132,11 +148,16 @@ set tm=500
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
 syntax enable
+syntax on
 
-colorscheme solarized
 set background=dark
+set t_Co=256
+colorscheme solarized
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+let g:solarized_contrast="normal"
+let g:solarized_visibility="normal"
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -152,6 +173,14 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+" 防止tmux下vim的背景色显示异常
+" Refer: http://sunaku.github.io/vim-256color-bce.html
+if &term =~ '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -199,10 +228,6 @@ vnoremap <silent> # :call VisualSelection('b')<CR>
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
-
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -280,5 +305,4 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
-
 

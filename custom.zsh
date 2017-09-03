@@ -1,13 +1,34 @@
-ZSH_THEME="bira"
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-UNAME=`uname`
+# ZSH_THEME="half-life"
+ZSH_THEME="ys"
 
-if [ "$UNAME" = "Linux" ]; then
+# PROMPT=$'%{$purple%}%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%} in %{$limegreen%}%~%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$orange%}%{$reset_color%} λ%{$reset_color%} '
+
+DEFAULT_USER="heguozhu"
+
+COMPLETION_WAITING_DOTS="true"
+
+HIST_STAMPS="yyyy/mm/dd"
+
+# my git config
+alias glum='git pull upstream master'
+alias glom='git pull origin master'
+alias gpom='git push origin master'
+alias gpo='git pull origin'
+alias glu='git pull upstream'
+# end
+
+export CLICOLOR=1
+if [ `uname -s` = "Linux" ]; then
     plugins=(git autojump golang httpie)
-elif [ "$UNAME" = "Darwin" ]; then
-    plugins=(git osx autojump brew brew-cask golang httpie)
+elif [ `uname -s` = "Darwin" ]; then
+    plugins=(git osx autojump brew brew-cask golang)
+    export LSCOLORS=gxfxcxdxbxegedabagacad
     export LANG=en_US.UTF-8
 fi
+
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Go Settings
 export GOPATH=~/code/go
