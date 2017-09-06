@@ -1,9 +1,10 @@
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # ZSH_THEME="half-life"
-ZSH_THEME="ys"
-
-# PROMPT=$'%{$purple%}%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%} in %{$limegreen%}%~%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$orange%}%{$reset_color%} λ%{$reset_color%} '
+# ZSH_THEME="ys"
+# ZSH_THEME="jispwoso"
+# ZSH_THEME="lukerandall"
+ZSH_THEME="steeef"
 
 DEFAULT_USER="heguozhu"
 
