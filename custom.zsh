@@ -16,7 +16,7 @@ HIST_STAMPS="yyyy/mm/dd"
 alias glum='git pull upstream master'
 alias glom='git pull origin master'
 alias gpom='git push origin master'
-alias gpo='git pull origin'
+alias gpo='git push origin'
 alias glu='git pull upstream'
 # end
 
@@ -49,6 +49,12 @@ function direct() {
     unset http_proxy;
     unset https_proxy;
 }
+
+# plugins
+plugins=(
+    git
+    zsh-syntax-highlighting
+)
 
 # End
 

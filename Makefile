@@ -1,4 +1,4 @@
-TARGETS=git zsh vim tmux
+TARGETS=prepare git zsh vim tmux
 
 ZSH_CONF_NAME=${USER}.zsh
 
@@ -10,10 +10,17 @@ VIM=~/.vimrc ~/.vim
 
 all: $(TARGETS)
 
+prepare: $(PREPARE)
 git: $(GIT)
 tmux: $(TMUX)
 zsh: $(ZSH) $(ZSH_CONF)
 vim: $(VIM)
+
+$(PREPARE):
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	brew update
+	brew install tmux
+	brew install iterm2
 
 $(GIT): gitconfig
 	cp gitconfig $(GIT)

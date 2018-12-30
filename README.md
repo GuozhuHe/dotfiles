@@ -1,8 +1,6 @@
-### my linux, os X  common software config files
-
 ### install
 
-    make install
+    make
 
 ### remove all
 
