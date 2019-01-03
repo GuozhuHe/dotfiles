@@ -21,6 +21,8 @@ $(PREPARE):
 	brew update
 	brew install tmux
 	brew install iterm2
+	brew install pyenv
+	brew install pyenv-virtualenv
 
 $(GIT): gitconfig
 	cp gitconfig $(GIT)

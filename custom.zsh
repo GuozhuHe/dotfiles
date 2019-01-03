@@ -60,6 +60,10 @@ plugins=(
 
 # Python Settings
 
+export PYENV_ROOR="$HOME/.pyenv"
+export PATH=$PYENV_ROOT/shims:$PATH
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # virtualenv wrapper
