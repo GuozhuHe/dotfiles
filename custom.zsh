@@ -1,9 +1,9 @@
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# ZSH_THEME="half-life"
-# ZSH_THEME="ys"
-# ZSH_THEME="jispwoso"
-# ZSH_THEME="lukerandall"
+export PATH="/usr/local/sbin:$PATH"
+
+export CLICOLOR=1
+
 ZSH_THEME="steeef"
 
 DEFAULT_USER="heguozhu"
@@ -12,19 +12,25 @@ COMPLETION_WAITING_DOTS="true"
 
 HIST_STAMPS="yyyy/mm/dd"
 
-# my git config
-alias glum='git pull upstream master'
-alias glom='git pull origin master'
-alias gpom='git push origin master'
-alias gpo='git push origin'
-alias glu='git pull upstream'
-# end
-
-export CLICOLOR=1
 if [ `uname -s` = "Linux" ]; then
-    plugins=(git autojump golang httpie)
+    plugins=(
+        git
+        golang
+        httpie
+        zsh-syntax-highlighting
+        colored-man-pages
+    )
 elif [ `uname -s` = "Darwin" ]; then
-    plugins=(git osx autojump brew brew-cask golang)
+    plugins=(
+        git
+        osx
+        brew
+        brew-cask
+        golang
+        httpie
+        zsh-syntax-highlighting
+        colored-man-pages
+    )
     export LSCOLORS=gxfxcxdxbxegedabagacad
     export LANG=en_US.UTF-8
 fi
@@ -34,46 +40,29 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 # Go Settings
 export GOPATH=~/code/go
 mkdir -p $GOPATH
-
+export PATH=$PATH:$GOPATH/bin
 # End
 
-export PATH=$PATH:$GOPATH/bin
-
 # Proxy Settings
-
 function proxy() {
-    export http_proxy=http://localhost:8118;export https_proxy=http://localhost:8118
+    export ALL_PROXY=socks5://127.0.0.1:1086
 }
 
 function direct() {
-    unset http_proxy;
-    unset https_proxy;
+    unset ALL_PROXY
 }
-
-# plugins
-plugins=(
-    git
-    zsh-syntax-highlighting
-)
-
+alias ip="curl https://ip.cn"
 # End
 
 # Python Settings
-
-export PYENV_ROOR="$HOME/.pyenv"
-export PATH=$PYENV_ROOT/shims:$PATH
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+# End
 
-# virtualenv wrapper
-
-VIRTUALENVWRAPPER_BIN=virtualenvwrapper.sh
-export WORKON_HOME=$HOME/.virtualenvs
-mkdir -p $WORKON_HOME
-
-if which $VIRTUALENVWRAPPER_BIN > /dev/null; then
-    source $VIRTUALENVWRAPPER_BIN
-fi
-
+# Git
+alias glum='git pull upstream master'
+alias glom='git pull origin master'
+alias gpom='git push origin master'
+alias gpo='git push origin'
+alias glu='git pull upstream'
 # End

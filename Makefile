@@ -34,7 +34,6 @@ $(ZSH):
 
 $(ZSH_CONF): custom.zsh
 	cp custom.zsh $(ZSH_CONF)
-	source $(ZSH_CONF)
 
 $(VIM): vimrc
 	rm -rf ~/.vimrc ~/.vim
