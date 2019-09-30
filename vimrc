@@ -50,6 +50,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'L9'
 Plugin 'sonph/onehalf', {'rtp': 'vim/'}
+Plugin 'KeitaNakamura/neodark.vim'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
@@ -154,10 +155,17 @@ syntax on
 
 set t_Co=256
 set cursorline
-colorscheme onehalfdark
-let g:airline_theme='onehalfdark'
+colorscheme neodark
+
+let g:lightline = {}
+let g:neodark#use_256color = 1
+let g:lightline.colorscheme = 'neodark'
+let g:neodark#solid_vertsplit = 1
+let g:neodark#terminal_transparent = 1
+" let g:airline_theme='onehalfdark'
 " lightline
 " let g:lightline.colorscheme='onehalfdark'
+set background=dark
 
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
